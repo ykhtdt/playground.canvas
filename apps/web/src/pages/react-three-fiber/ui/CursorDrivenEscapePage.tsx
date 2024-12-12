@@ -77,20 +77,32 @@ const Particles = ({
           positions[i * 3] = newX
           positions[i * 3 + 1] = newY
         } else {
-          const newVelocityX = x + velocityX
-          const newYelocityY = y + velocityY
-
-          positions[i * 3] = newVelocityX
-          positions[i * 3 + 1] = newYelocityY
+          positions[i * 3] = x + velocityX
+          positions[i * 3 + 1] = y + velocityY
         }
 
-        if (x > paritclesBounds.width / 2 || x < -paritclesBounds.width / 2) {
+        if (x > paritclesBounds.width / 2) {
           velocityX *= -1
+          positions[i * 3] = paritclesBounds.width / 2 - 0.1
         }
 
-        if (y > paritclesBounds.height / 2 || y < -paritclesBounds.height / 2) {
-          velocityY *= -1
+        if (x < -paritclesBounds.width / 2) {
+          velocityX *= -1
+          positions[i * 3] = -paritclesBounds.width / 2 + 0.1
         }
+
+        if (y > paritclesBounds.height / 2) {
+          velocityY *= -1
+          positions[i * 3 + 1] = paritclesBounds.height / 2 - 0.1
+        }
+
+        if (y < -paritclesBounds.height / 2) {
+          velocityY *= -1
+          positions[i * 3 + 1] = -paritclesBounds.height / 2 + 0.1
+        }
+
+        velocities[i * 3] = velocityX
+        velocities[i * 3 + 1] = velocityY
       }
     }
 
@@ -109,7 +121,7 @@ const Particles = ({
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={1.5} color="#71717a" opacity={0.75} transparent />
+      <pointsMaterial size={1.5} color="#e4e4e7" opacity={0.75} transparent />
     </points>
   )
 }
