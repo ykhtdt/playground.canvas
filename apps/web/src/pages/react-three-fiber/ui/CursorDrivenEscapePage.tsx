@@ -28,6 +28,25 @@ const Particles = ({
   const particlesRef = useRef<THREE.BufferGeometry>(null)
   const { camera, pointer } = useThree()
 
+  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  // useEffect(() => {
+  //   const handleMouseMove = (event: MouseEvent) => {
+  //     const width = window.innerWidth
+  //     const height = window.innerHeight
+
+  //     const x = (event.clientX / width) * 2 - 1
+  //     const y = -(event.clientY / height) * 2 + 1
+
+  //     setMousePosition({ x, y })
+  //   }
+
+  //   window.addEventListener("mousemove", handleMouseMove)
+  //   return () => {
+  //     window.removeEventListener("mousemove", handleMouseMove)
+  //   }
+  // }, [])
+
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const velocities = new Float32Array(count * 3)
@@ -52,6 +71,7 @@ const Particles = ({
     const { positions, velocities } = particles
 
     if (count > 0) {
+      // const mousePosWorld = new THREE.Vector3(mousePosition.x, mousePosition.y, 0.5)
       const mousePosWorld = new THREE.Vector3(pointer.x, pointer.y, 0.5)
       mousePosWorld.unproject(camera)
 
